@@ -8,32 +8,32 @@ SELECT
     `gamers`.`idgamers`,
     gamers.`name`,
     `gamers`.`country`,
-    `gamers`.`favourite_game`,
+    `gamers`.`favorite_game`,
     `gamers`.`dob`
 FROM
-    `bd1`.`gamers`;
+    `20251025`.`gamers`;
 SELECT 
     gamers.`name`,
     `gamers`.`country`
 FROM
-    `bd1`.`gamers`;    
+    `20251025`.`gamers`;    
     
 /* Выборка из нескольких таблиц с соединением */
 SELECT 
     `gamers`.`idgamers`,
     gamers.`name`,
     `gamers`.`country`,
-    `gamers`.`favourite_game`,
+    `gamers`.`favorite_game`,
     `gamers`.`dob`
 FROM
-    `bd1`.`gamers`;
+    `20251025`.`gamers`;
 SELECT ALL
     gamers.`name`, games.`game_name`, games.`country` as 'Страна разработчика'
 FROM
-    `bd1`.`gamers`,
+    `20251025`.`gamers`,
     games
 WHERE
-    favourite_game = `games`.`idgame`;  
+    favorite_game = `games`.`idgame`;  
 
 /*Исключение дублирующихся значений из результатов запроса*/
 SELECT DISTINCT
@@ -45,35 +45,35 @@ FROM
 SELECT DISTINCT
     `gamer`, `game`
 FROM
-    bd1.gamers_games;
+    20251025.gamers_games;
     
 /*Использование фильтрации значений (предложение WHERE)*/
 SELECT 
     gamers.`name`
 FROM
-    `bd1`.`gamers`
+    `20251025`.`gamers`
 WHERE
-    `favourite_game` = 102;
+    `favorite_game` = 102;
 
 /* Операции сравнения "=, <>, <=, >=" */
 SELECT 
     gamers.`name`, country
 FROM
-    `bd1`.`gamers`
+    `20251025`.`gamers`
 WHERE
     `country` = 'Китай';
     
 SELECT 
     gamers.`name`, country
 FROM
-    `bd1`.`gamers`
+    `20251025`.`gamers`
 WHERE
     `country` <> 'Китай';
 
 SELECT 
     gamers.`name`, country
 FROM
-    `bd1`.`gamers`
+    `20251025`.`gamers`
 WHERE
     `country` >= 'США';
 
@@ -83,7 +83,7 @@ SELECT `gamers_games`.`idgamers_games`,
     `gamers_games`.`game`,
     `gamers_games`.`date`,
     `gamers_games`.`time`
-FROM `bd1`.`gamers_games`
+FROM `20251025`.`gamers_games`
 WHERE
     `date` > 20200000;
 
@@ -92,7 +92,7 @@ SELECT `gamers_games`.`idgamers_games`,
     `gamers_games`.`game`,
     `gamers_games`.`date`,
     `gamers_games`.`time`
-FROM `bd1`.`gamers_games`
+FROM `20251025`.`gamers_games`
 WHERE
     `time` > '00:10:10';
     
@@ -102,7 +102,7 @@ SELECT `gamers_games`.`idgamers_games`,
     `gamers_games`.`game`,
     `gamers_games`.`date`,
     `gamers_games`.`time`
-FROM `bd1`.`gamers_games`
+FROM `20251025`.`gamers_games`
 WHERE
     `gamers_games`.`game`= 100 OR game = 106;
 
@@ -111,7 +111,7 @@ SELECT `gamers_games`.`idgamers_games`,
     `gamers_games`.`game`,
     `gamers_games`.`date`,
     `gamers_games`.`time`
-FROM `bd1`.`gamers_games`
+FROM `20251025`.`gamers_games`
 WHERE
     `gamers_games`.`game`= 100 AND `date`= 20110711;
 
@@ -140,23 +140,23 @@ SELECT
     `gamers`.`idgamers`,
     `gamers`.`name`,
     `gamers`.`country`,
-    `gamers`.`favourite_game`,
+    `gamers`.`favorite_game`,
     `gamers`.`dob`
 FROM
-    `bd1`.`gamers`
+    `20251025`.`gamers`
 WHERE
-    `gamers`.`favourite_game` >= 100
+    `gamers`.`favorite_game` >= 100
         AND `country` > 'A';
 SELECT 
     `gamers`.`idgamers`,
     `gamers`.`name`,
     `gamers`.`country`,
-    `gamers`.`favourite_game`,
+    `gamers`.`favorite_game`,
     `gamers`.`dob`
 FROM
-    `bd1`.`gamers`
+    `20251025`.`gamers`
 WHERE
-    `gamers`.`favourite_game` <= 100
+    `gamers`.`favorite_game` <= 100
         AND `country` < 'A';
 # NULL-значения не отбираются при помощи операций сравнения
 
@@ -165,29 +165,29 @@ SELECT
     `gamers`.`idgamers`,
     `gamers`.`name`,
     `gamers`.`country`,
-    `gamers`.`favourite_game`,
+    `gamers`.`favorite_game`,
     `gamers`.`dob`
 FROM
-    `bd1`.`gamers`
+    `20251025`.`gamers`
 WHERE
-    `gamers`.`favourite_game` >= 100
+    `gamers`.`favorite_game` >= 100
         AND `country` > 'A'
         OR `country` IS NULL
-        AND favourite_game IS NOT NULL;
+        AND favorite_game IS NOT NULL;
         
 SELECT 
     `gamers`.`idgamers`,
     `gamers`.`name`,
     `gamers`.`country`,
-    `gamers`.`favourite_game`,
+    `gamers`.`favorite_game`,
     `gamers`.`dob`
 FROM
-    `bd1`.`gamers`
+    `20251025`.`gamers`
 WHERE
-    `gamers`.`favourite_game` >= 100
+    `gamers`.`favorite_game` >= 100
         AND `country` > 'A'
         OR `country` IS NULL
-        AND NOT favourite_game IS NULL;
+        AND NOT favorite_game IS NULL;
 
 #Объединение нескольких условий при помощи логических операторов        
 SELECT 
@@ -256,7 +256,7 @@ SELECT
 FROM
     `gamers`
 WHERE
-country IN ('США', 'Китай', 'Россия') OR favourite_game IN (103, 105);
+country IN ('США', 'Китай', 'Россия') OR favorite_game IN (103, 105);
 
 #Исключение граничных значений из конструкции BETWEEN
 SELECT 
@@ -350,17 +350,17 @@ FROM
 SELECT 
     AVG(YEAR(`date`)), AVG(MONTH(`date`)), AVG(DAY(`date`))
 FROM
-    bd1.gamers_games;
+    20251025.gamers_games;
 
 SELECT 
     AVG(`time`)
 FROM
-    bd1.gamers_games;
+    20251025.gamers_games;
     
 SELECT 
     from_unixtime(avg(UNIX_timestamp(`date`)))
 FROM
-    bd1.gamers_games;
+    20251025.gamers_games;
     
 #Подсчёт количества значений, полученных в результате отбора
 SELECT 
