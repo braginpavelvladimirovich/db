@@ -130,10 +130,25 @@ FROM
     `20250930`.`gamer`
         RIGHT JOIN
     `20250930`.`gamer_has_group` on `gamer`.`group_grid` = `gamer_has_group`.`group_grid`;
-/* вывод игроков имеющих группу по ид группы */
 SELECT 
     *
 FROM
     `20250930`.`gamer`
         LEFT JOIN
     `20250930`.`gamer_has_group` ON `gamer`.`group_grid` = `gamer_has_group`.`group_grid`;
+/* вывод игроков-лидеров имеющих группу по ид группы где ид группы больше 1 и ид игрока больше 0 и цель группы больше 1
+вывод информации без пустых ячеек и где ид игрока совпадает */
+
+SELECT 
+    `gamer`.`name`,`gamer`.`role`,`gamer`.`level`
+FROM
+    `20250930`.`gamer`
+        RIGHT JOIN
+    `20250930`.`gamer_has_group` ON `gamer`.`group_grid` = `gamer_has_group`.`group_grid`
+        AND `gamer_has_group`.`group_grid` > 1
+        AND `gamer`.`gid` > 0
+        AND `gamer`.`target_tid` > 1
+WHERE
+    `gamer`.`gid` IS NOT NULL
+        AND `gamer`.`gid` = `gamer_has_group`.`gamer_gid`
+        AND `gamer`.`leader` IS TRUE;
